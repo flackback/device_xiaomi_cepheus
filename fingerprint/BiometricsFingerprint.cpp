@@ -480,10 +480,12 @@ Return<void> BiometricsFingerprint::onFingerUp() {
 }
 
 Return<void> BiometricsFingerprint::onShowUdfpsOverlay() {
+    set(FOD_STATUS_PATH, FOD_STATUS_ON);
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onHideUdfpsOverlay() {
+    set(FOD_STATUS_PATH, FOD_STATUS_OFF);
     return Void();
 }
 
