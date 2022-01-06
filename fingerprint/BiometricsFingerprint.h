@@ -18,13 +18,14 @@
 #ifndef ANDROID_HARDWARE_BIOMETRICS_FINGERPRINT_V2_3_BIOMETRICSFINGERPRINT_H
 #define ANDROID_HARDWARE_BIOMETRICS_FINGERPRINT_V2_3_BIOMETRICSFINGERPRINT_H
 
-#include <android/hardware/biometrics/fingerprint/2.3/IBiometricsFingerprint.h>
 #include <android/log.h>
 #include <hardware/hardware.h>
 #include <hidl/MQDescriptor.h>
 #include <hidl/Status.h>
 #include <log/log.h>
 #include <vendor/xiaomi/hardware/fingerprintextension/1.0/IXiaomiFingerprint.h>
+
+#include <org/pixelexperience/biometrics/fingerprint/1.0/IBiometricsFingerprint.h>
 
 #include "fingerprint.h"
 
@@ -44,7 +45,6 @@ using ::android::hardware::biometrics::fingerprint::V2_1::FingerprintAcquiredInf
 using ::android::hardware::biometrics::fingerprint::V2_1::FingerprintError;
 using ::android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprintClientCallback;
 using ::android::hardware::biometrics::fingerprint::V2_1::RequestStatus;
-using ::android::hardware::biometrics::fingerprint::V2_3::IBiometricsFingerprint;
 
 using ::vendor::xiaomi::hardware::fingerprintextension::V1_0::IXiaomiFingerprint;
 
@@ -89,8 +89,10 @@ struct BiometricsFingerprint : public IBiometricsFingerprint, public IXiaomiFing
     Return<bool> isUdfps(uint32_t sensorId) override;
     Return<void> onFingerDown(uint32_t x, uint32_t y, float minor, float major) override;
     Return<void> onFingerUp() override;
-    Return<void> onShowUdfpsOverlay() override;
-    Return<void> onHideUdfpsOverlay() override;
+
+    // Methods from ::org::pixelexperience::biometrics::fingerprint::V1_0::IBiometricsFingerprint follow.
+    Return<void> onShowUdfpsOverlay();
+    Return<void> onHideUdfpsOverlay();
 };
 
 }  // namespace implementation
